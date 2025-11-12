@@ -7,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -51,6 +52,12 @@ fun Dashboard(navController: NavHostController) {
                     navigationIconContentColor = Color.Black
                 ),
                 actions = {
+                    IconButton(onClick = { navController.navigate("notifications") }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Notifications,
+                            contentDescription = "Notifications"
+                        )
+                    }
                     IconButton(onClick = { navController.navigate("history") }) {
                         Icon(
                             imageVector = Icons.Filled.History,

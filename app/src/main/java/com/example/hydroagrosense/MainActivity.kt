@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.hydroagrosense.ui.screens.Dashboard
 import com.example.hydroagrosense.ui.screens.IrrigationDetails
 import com.example.hydroagrosense.ui.screens.IrrigationHistory
+import com.example.hydroagrosense.ui.screens.Notifications
 import com.example.hydroagrosense.ui.theme.HydroAgroSenseTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,6 +36,11 @@ class MainActivity : ComponentActivity() {
                             Dashboard(
                                 navController = navController,
                             )
+                        }
+                        composable(
+                            route = "notifications",
+                        ) {
+                            Notifications(navController = navController)
                         }
                         composable(
                             route = "history",
