@@ -1,9 +1,7 @@
 package com.example.hydroagrosense.ui.components
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,7 +25,6 @@ import com.example.hydroagrosense.data.Measure
 import com.example.hydroagrosense.utils.getBarMax
 import com.example.hydroagrosense.utils.getImageForMeasure
 
-@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun MeasureCard(
     modifier: Modifier = Modifier,
@@ -55,26 +52,26 @@ fun MeasureCard(
         border = BorderStroke(color = Color(0xFFFFFFFF), width = 1.dp),
     ) {
         Column(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 24.dp, bottom = 24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Top
         ) {
-            // Header Row
+            // Header Row: measure type and icon
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 12.dp, end = 12.dp),
-                verticalAlignment = Alignment.Top,
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Measure Type Text
                 Text(
                     text = measure.type,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp,
                     color = Color(0xFF000000)
                 )
-                // Measure Icon
+
                 AsyncImage(
                     model = getImageForMeasure(measure.type),
                     contentDescription = "Icon for ${measure.type}",
@@ -83,41 +80,17 @@ fun MeasureCard(
                         .height(36.dp)
                 )
             }
-            Spacer(modifier = Modifier.height(4.dp))
-            // Level Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Box(
-                    modifier = Modifier.width(68.dp)
-                ) {
-                    // Level Text
-                    Text(
-                        text = levelValue,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 16.sp,
-                        color = Color(0xFF000000)
-                    )
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                // Measure Bar
-                MeasureBar(
-                    measure = measure,
-                    barHeight = barHeight,
-                    barMax = barMax
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                // Value Text
-                Text(
-                    text = "${measure.value} ${measure.unit}",
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 16.sp,
-                    color = Color(0xFF000000)
-                )
 
-            }
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Measure row with bar and value
+            MeasureRow(
+                modifier = Modifier.fillMaxWidth(),
+                levelValue = levelValue,
+                measure = measure,
+                barMax = barMax,
+                barHeight = barHeight
+            )
         }
     }
 }
