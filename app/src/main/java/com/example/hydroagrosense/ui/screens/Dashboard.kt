@@ -3,6 +3,8 @@ package com.example.hydroagrosense.ui.screens
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -22,6 +24,7 @@ import com.example.hydroagrosense.ui.components.OptimalRangesCard
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Dashboard() {
+    val scrollState = rememberScrollState()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFFEDEDED),
@@ -46,7 +49,9 @@ fun Dashboard() {
         }
     ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(scrollState)
         ) {
             OptimalRangesCard(
                 optimalMeasures = listOf(
