@@ -7,9 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -21,10 +25,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun IrrigationHistory() {
+fun IrrigationHistory(navController: NavHostController) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFFEDEDED),
@@ -39,6 +44,17 @@ fun IrrigationHistory() {
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
+                },
+                navigationIcon = {
+                    navController.let { nav ->
+                        IconButton(onClick = { nav.popBackStack() }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = Color.Black
+                            )
+                        }
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color(0xFFE3E3E3),
@@ -55,6 +71,7 @@ fun IrrigationHistory() {
                 modifier = Modifier
                     .padding(8.dp)
                     .fillMaxWidth(),
+                onClick = { navController.navigate("details") },
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xFFFFFFFF),
                     contentColor = Color.Black,
