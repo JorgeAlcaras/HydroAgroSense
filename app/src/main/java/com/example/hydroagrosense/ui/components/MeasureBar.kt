@@ -32,7 +32,8 @@ fun MeasureBar(
     }
 
     Box(
-        modifier = Modifier
+        // Use incoming modifier so parent weight controls width; apply height here
+        modifier = modifier
             .height(barHeight),
         contentAlignment = Alignment.CenterStart
     ) {
