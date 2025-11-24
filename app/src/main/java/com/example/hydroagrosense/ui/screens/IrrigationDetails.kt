@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -28,13 +29,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.hydroagrosense.data.Measure
 import com.example.hydroagrosense.data.OptimalMeasure
+import com.example.hydroagrosense.domain.HydroViewModel
 import com.example.hydroagrosense.ui.components.MeasureDetailsRow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IrrigationDetails(
-    navController: NavHostController?
+    navController: NavHostController?,
+    viewModel: HydroViewModel
 ) {
+    // Obtenemos el item seleccionado desde el ViewModel
+    val history = viewModel.selectedHistory.observeAsState().value
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         containerColor = Color(0xFFEDEDED),
@@ -72,6 +78,8 @@ fun IrrigationDetails(
         Column(
             modifier = Modifier.padding(innerPadding)
         ) {
+
+            // --------- CARD: IRRIGATION EVENT (usa el item real si existe) ----------
             Card(
                 modifier = Modifier
                     .padding(8.dp)
@@ -93,29 +101,31 @@ fun IrrigationDetails(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "Date: 10/10/2023",
+                    text = "Date: ${history?.date ?: "N/A"}",
                     fontSize = 16.sp,
                     color = Color.DarkGray,
                     fontWeight = FontWeight.Normal,
                     modifier = Modifier.padding(start = 16.dp, bottom = 2.dp)
                 )
                 Text(
-                    text = "Duration: 30 minutes",
+                    text = "Duration: ${(history?.realDuration ?: history?.requestedDuration ?: 0)} s",
                     fontSize = 16.sp,
                     color = Color.DarkGray,
                     fontWeight = FontWeight.Normal,
                     modifier = Modifier.padding(start = 16.dp, bottom = 2.dp)
                 )
                 Text(
-                    text = "Reaeson: Soil moisture below optimal level",
+                    text = "Reason: ${history?.reason ?: "Unknown"}",
                     fontSize = 16.sp,
                     color = Color.DarkGray,
                     fontWeight = FontWeight.Normal,
                     modifier = Modifier.padding(start = 16.dp, bottom = 16.dp)
                 )
-
             }
+
             Spacer(modifier = Modifier.height(8.dp))
+
+            // ---------------------- BEFORE IRRIGATION ----------------------
             Card(
                 modifier = Modifier
                     .padding(8.dp)
@@ -136,6 +146,7 @@ fun IrrigationDetails(
                     modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
                 )
                 Spacer(modifier = Modifier.height(4.dp))
+
                 MeasureDetailsRow(
                     modifier = Modifier.padding(vertical = 8.dp),
                     barMax = 100.0,
@@ -212,6 +223,8 @@ fun IrrigationDetails(
 
                 Spacer(modifier = Modifier.height(16.dp))
             }
+
+            // ---------------------- AFTER IRRIGATION ----------------------
             Card(
                 modifier = Modifier
                     .padding(8.dp)
@@ -232,6 +245,7 @@ fun IrrigationDetails(
                     modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
                 )
                 Spacer(modifier = Modifier.height(4.dp))
+
                 MeasureDetailsRow(
                     modifier = Modifier.padding(vertical = 8.dp),
                     barMax = 100.0,
