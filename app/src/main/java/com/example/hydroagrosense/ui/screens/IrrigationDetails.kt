@@ -45,13 +45,8 @@ fun IrrigationDetails(
     // Obtenemos el item seleccionado desde el ViewModel
     val history = viewModel.selectedHistory.observeAsState().value
     val beforeMap = jsonStringToMap(history?.before ?: "{}")
-    beforeMap["Soil"]?.let { v ->
-        when (v) {
-            is Number -> v.toDouble()
-            is String -> v.toDoubleOrNull()
-            else -> null
-        }
-    } ?: 0.0
+    val afterMap = jsonStringToMap(history?.after ?: "{}")
+
 
 
     Scaffold(
@@ -175,7 +170,7 @@ fun IrrigationDetails(
                     measure = Measure(
                         id = 2,
                         type = "Soil Moisture",
-                        value = beforeMap["soil"]?.let { v ->
+                        value = beforeMap["Soil"]?.let { v ->
                             when (v) {
                                 is Number -> v.toDouble()
                                 is String -> v.toDoubleOrNull()
@@ -198,8 +193,14 @@ fun IrrigationDetails(
                     barMax = 100.0,
                     measure = Measure(
                         id = 1,
-                        type = history.toString(),
-                        value = 35.0,
+                        type = "Air Humidity",
+                        value = beforeMap["Air"]?.let { v ->
+                            when (v) {
+                                is Number -> v.toDouble()
+                                is String -> v.toDoubleOrNull()
+                                else -> null
+                            }
+                        } ?: 0.0,
                         unit = "%",
                         timestamp = System.currentTimeMillis(),
                         optimalMeasure = OptimalMeasure(
@@ -218,7 +219,13 @@ fun IrrigationDetails(
                     measure = Measure(
                         id = 3,
                         type = "Temperature",
-                        value = 37.0,
+                        value = beforeMap["Temperature"]?.let { v ->
+                            when (v) {
+                                is Number -> v.toDouble()
+                                is String -> v.toDoubleOrNull()
+                                else -> null
+                            }
+                        } ?: 0.0,
                         unit = "°C",
                         timestamp = System.currentTimeMillis(),
                         optimalMeasure = OptimalMeasure(
@@ -236,7 +243,13 @@ fun IrrigationDetails(
                     measure = Measure(
                         id = 4,
                         type = "Light Intensity",
-                        value = 85.0,
+                        value = beforeMap["Light"]?.let { v ->
+                            when (v) {
+                                is Number -> v.toDouble()
+                                is String -> v.toDoubleOrNull()
+                                else -> null
+                            }
+                        } ?: 0.0,
                         unit = "%",
                         timestamp = System.currentTimeMillis(),
                         optimalMeasure = OptimalMeasure(
@@ -280,7 +293,13 @@ fun IrrigationDetails(
                     measure = Measure(
                         id = 2,
                         type = "Soil Moisture",
-                        value = 45.0,
+                        value = afterMap["Soil"]?.let { v ->
+                            when (v) {
+                                is Number -> v.toDouble()
+                                is String -> v.toDoubleOrNull()
+                                else -> null
+                            }
+                        } ?: 0.0,
                         unit = "%",
                         timestamp = System.currentTimeMillis(),
                         optimalMeasure = OptimalMeasure(
@@ -298,7 +317,13 @@ fun IrrigationDetails(
                     measure = Measure(
                         id = 1,
                         type = "Air Humidity",
-                        value = 55.0,
+                        value = afterMap["Air"]?.let { v ->
+                            when (v) {
+                                is Number -> v.toDouble()
+                                is String -> v.toDoubleOrNull()
+                                else -> null
+                            }
+                        } ?: 0.0,
                         unit = "%",
                         timestamp = System.currentTimeMillis(),
                         optimalMeasure = OptimalMeasure(
@@ -317,7 +342,13 @@ fun IrrigationDetails(
                     measure = Measure(
                         id = 3,
                         type = "Temperature",
-                        value = 22.0,
+                        value = afterMap["Temperature"]?.let { v ->
+                            when (v) {
+                                is Number -> v.toDouble()
+                                is String -> v.toDoubleOrNull()
+                                else -> null
+                            }
+                        } ?: 0.0,
                         unit = "°C",
                         timestamp = System.currentTimeMillis(),
                         optimalMeasure = OptimalMeasure(
@@ -335,7 +366,13 @@ fun IrrigationDetails(
                     measure = Measure(
                         id = 4,
                         type = "Light Intensity",
-                        value = 70.0,
+                        value = afterMap["Light"]?.let { v ->
+                            when (v) {
+                                is Number -> v.toDouble()
+                                is String -> v.toDoubleOrNull()
+                                else -> null
+                            }
+                        } ?: 0.0,
                         unit = "%",
                         timestamp = System.currentTimeMillis(),
                         optimalMeasure = OptimalMeasure(

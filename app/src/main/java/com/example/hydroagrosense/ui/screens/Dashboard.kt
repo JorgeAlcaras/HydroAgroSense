@@ -123,7 +123,6 @@ fun Dashboard(
                     )
                 )
             } else {
-                // fallback a los valores quemados mientras no haya config
                 listOf(
                     OptimalMeasure(1, "Air Humidity", 50.0, 70.0, "%"),
                     OptimalMeasure(2, "Soil Moisture", 40.0, 60.0, "%"),
