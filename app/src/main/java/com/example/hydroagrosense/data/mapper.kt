@@ -38,10 +38,10 @@ fun Telemetry.toEntity(): TelemetryEntity =
     TelemetryEntity(
         deviceId = deviceId ?: "",
         date = date ?: "",
-        temperature = temperature,
-        air = air,
-        soil = soil,
-        light = light,
+        Temperature = Temperature,
+        Air = Air,
+        Soil = Soil,
+        Light = Light,
         configVersion = configVersion
     )
 
@@ -53,6 +53,6 @@ fun IrrigationHistory.toEntity(): IrrigationHistoryEntity =
         requestedDuration = requestedDuration,
         realDuration = realDuration,
         statusJson = status?.let { gson.toJson(it) },
-        beforeJson = before?.let { gson.toJson(it) },
-        afterJson = after?.let { gson.toJson(it) }
+        before = before?.let { gson.toJson(it) },
+        after = after?.let { gson.toJson(it) }
     )

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/hydroagrosense/ui/navigation/AppNavHost.kt">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/src/main/java/com/example/hydroagrosense/ui/navigation/AppNavHost.kt" />
+              <option name="originalContent" value="package com.example.hydroagrosense.ui.navigation&#10;&#10;import androidx.compose.foundation.layout.Column&#10;import androidx.compose.foundation.layout.padding&#10;import androidx.compose.runtime.Composable&#10;import androidx.compose.ui.Modifier&#10;import androidx.compose.ui.unit.dp&#10;import androidx.navigation.NavHostController&#10;import androidx.navigation.compose.NavHost&#10;import androidx.navigation.compose.composable&#10;import androidx.navigation.compose.rememberNavController&#10;import com.example.hydroagrosense.ui.screens.Dashboard&#10;import com.example.hydroagrosense.ui.screens.IrrigationDetails&#10;import com.example.hydroagrosense.ui.screens.IrrigationHistory&#10;&#10;@Composable&#10;fun AppNavHost(&#10;    navController: NavHostController = rememberNavController()&#10;) {&#10;    Column(modifier = Modifier.padding(0.dp)) {&#10;        NavHost(&#10;            navController = navController,&#10;            startDestination = &quot;dashboard&quot;&#10;        ) {&#10;            composable(&quot;dashboard&quot;) { Dashboard() }&#10;            composable(&quot;history&quot;) { IrrigationHistory() }&#10;            composable(&quot;details&quot;) { IrrigationDetails() }&#10;        }&#10;    }&#10;}&#10;" />
+              <option name="updatedContent" value="package com.example.hydroagrosense.ui.navigation&#10;&#10;import androidx.compose.foundation.layout.Column&#10;import androidx.compose.foundation.layout.padding&#10;import androidx.compose.runtime.Composable&#10;import androidx.compose.ui.Modifier&#10;import androidx.compose.ui.unit.dp&#10;import androidx.navigation.NavHostController&#10;import androidx.navigation.compose.NavHost&#10;import androidx.navigation.compose.composable&#10;import androidx.navigation.compose.rememberNavController&#10;import com.example.hydroagrosense.ui.screens.Dashboard&#10;import com.example.hydroagrosense.ui.screens.IrrigationDetails&#10;import com.example.hydroagrosense.ui.screens.IrrigationHistory&#10;&#10;@Composable&#10;fun AppNavHost(&#10;    navController: NavHostController = rememberNavController()&#10;) {&#10;    Column(modifier = Modifier.padding(0.dp)) {&#10;        NavHost(&#10;            navController = navController,&#10;            startDestination = &quot;dashboard&quot;&#10;        ) {&#10;            composable(&quot;dashboard&quot;) { Dashboard(navController) }&#10;            composable(&quot;history&quot;) { IrrigationHistory(navController) }&#10;            composable(&quot;details&quot;) { IrrigationDetails() }&#10;        }&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

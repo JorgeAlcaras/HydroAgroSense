@@ -141,8 +141,8 @@ fun Dashboard(
             MeasureCard(
                 measure = Measure(
                     id = 1,
-                    type = "Air Humidity",
-                    value = lastTelemetry?.air ?: 0.0,
+                    type = "Air",
+                    value = lastTelemetry?.Air ?: 0.0,
                     unit = "%",
                     timestamp = System.currentTimeMillis(),
                     optimalMeasure = optimalMeasures[0]
@@ -152,7 +152,7 @@ fun Dashboard(
                 measure = Measure(
                     id = 2,
                     type = "Soil Moisture",
-                    value = lastTelemetry?.soil ?: 0.0,
+                    value = lastTelemetry?.Soil ?: 0.0,
                     unit = "%",
                     timestamp = System.currentTimeMillis(),
                     optimalMeasure = optimalMeasures[1]
@@ -162,7 +162,7 @@ fun Dashboard(
                 measure = Measure(
                     id = 3,
                     type = "Temperature",
-                    value = lastTelemetry?.temperature ?: 0.0,
+                    value = lastTelemetry?.Temperature ?: 0.0,
                     unit = "°C",
                     timestamp = System.currentTimeMillis(),
                     optimalMeasure = optimalMeasures[2]
@@ -172,7 +172,7 @@ fun Dashboard(
                 measure = Measure(
                     id = 4,
                     type = "Light Intensity",
-                    value = lastTelemetry?.light ?: 0.0,
+                    value = lastTelemetry?.Light ?: 0.0,
                     unit = "%",
                     timestamp = System.currentTimeMillis(),
                     optimalMeasure = optimalMeasures[3]

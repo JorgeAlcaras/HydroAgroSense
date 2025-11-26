@@ -1,6 +1,8 @@
 package com.example.hydroagrosense.data.local.entities
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "irrigation_history",
@@ -14,6 +16,6 @@ data class IrrigationHistoryEntity(
     val requestedDuration: Int?,
     val realDuration: Int?,
     val statusJson: String?,      // guardamos el status como JSON
-    val beforeJson: String?,      // telemetryBefore como JSON
-    val afterJson: String?        // telemetryAfter como JSON
+    val before: String?,      // telemetryBefore como JSON
+    val after: String?        // telemetryAfter como JSON
 )

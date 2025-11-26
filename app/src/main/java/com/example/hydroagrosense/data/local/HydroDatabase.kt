@@ -14,7 +14,7 @@ import com.example.hydroagrosense.data.local.entities.TelemetryEntity
         TelemetryEntity::class,
         IrrigationHistoryEntity::class
     ],
-    version = 1,
+    version = 5,
     exportSchema = false
 )
 abstract class HydroDatabase : RoomDatabase() {
@@ -33,7 +33,7 @@ abstract class HydroDatabase : RoomDatabase() {
                     context.applicationContext,
                     HydroDatabase::class.java,
                     "hydro_agro_sense.db"
-                ).build().also { INSTANCE = it }
+                ).fallbackToDestructiveMigration().build().also { INSTANCE = it }
             }
         }
     }

@@ -1,6 +1,8 @@
 package com.example.hydroagrosense.data.local.entities
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "telemetry",
@@ -10,9 +12,9 @@ data class TelemetryEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val deviceId: String,
     val date: String,
-    val temperature: Double?,
-    val air: Double?,
-    val soil: Double?,
-    val light: Double?,
+    val Temperature: Double?,
+    val Air: Double?,
+    val Soil: Double?,
+    val Light: Double?,
     val configVersion: Int?
 )

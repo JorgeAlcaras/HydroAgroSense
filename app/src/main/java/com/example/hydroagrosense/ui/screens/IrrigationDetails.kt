@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
@@ -31,6 +33,7 @@ import com.example.hydroagrosense.data.Measure
 import com.example.hydroagrosense.data.OptimalMeasure
 import com.example.hydroagrosense.domain.HydroViewModel
 import com.example.hydroagrosense.ui.components.MeasureDetailsRow
+import com.example.hydroagrosense.utils.jsonStringToMap
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,8 +41,18 @@ fun IrrigationDetails(
     navController: NavHostController?,
     viewModel: HydroViewModel
 ) {
+    val scrollState = rememberScrollState()
     // Obtenemos el item seleccionado desde el ViewModel
     val history = viewModel.selectedHistory.observeAsState().value
+    val beforeMap = jsonStringToMap(history?.before ?: "{}")
+    beforeMap["Soil"]?.let { v ->
+        when (v) {
+            is Number -> v.toDouble()
+            is String -> v.toDoubleOrNull()
+            else -> null
+        }
+    } ?: 0.0
+
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -76,7 +89,9 @@ fun IrrigationDetails(
         }
     ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(scrollState)
         ) {
 
             // --------- CARD: IRRIGATION EVENT (usa el item real si existe) ----------
@@ -108,7 +123,14 @@ fun IrrigationDetails(
                     modifier = Modifier.padding(start = 16.dp, bottom = 2.dp)
                 )
                 Text(
-                    text = "Duration: ${(history?.realDuration ?: history?.requestedDuration ?: 0)} s",
+                    text = "Requested Duration: ${(history?.requestedDuration ?: 0)} s",
+                    fontSize = 16.sp,
+                    color = Color.DarkGray,
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier.padding(start = 16.dp, bottom = 2.dp)
+                )
+                Text(
+                    text = "Real Duration: ${(history?.realDuration ?: history?.requestedDuration ?: 0)} s",
                     fontSize = 16.sp,
                     color = Color.DarkGray,
                     fontWeight = FontWeight.Normal,
@@ -153,7 +175,13 @@ fun IrrigationDetails(
                     measure = Measure(
                         id = 2,
                         type = "Soil Moisture",
-                        value = 32.0,
+                        value = beforeMap["soil"]?.let { v ->
+                            when (v) {
+                                is Number -> v.toDouble()
+                                is String -> v.toDoubleOrNull()
+                                else -> null
+                            }
+                        } ?: 0.0,
                         unit = "%",
                         timestamp = System.currentTimeMillis(),
                         optimalMeasure = OptimalMeasure(
@@ -170,7 +198,7 @@ fun IrrigationDetails(
                     barMax = 100.0,
                     measure = Measure(
                         id = 1,
-                        type = "Air Humidity",
+                        type = history.toString(),
                         value = 35.0,
                         unit = "%",
                         timestamp = System.currentTimeMillis(),
