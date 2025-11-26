@@ -22,4 +22,8 @@ interface IrrigationHistoryDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(items: List<IrrigationHistoryEntity>)
+
+    @Query("DELETE FROM irrigation_history WHERE deviceId = :deviceId")
+    suspend fun deleteAll(deviceId: String)
+    
 }

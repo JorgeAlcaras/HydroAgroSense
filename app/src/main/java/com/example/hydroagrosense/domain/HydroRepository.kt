@@ -55,6 +55,8 @@ class HydroRepository(
 
     suspend fun refreshIrrigationHistory(deviceId: String, limit: Int = 20) {
         val list = api.getIrrigationHistory(deviceId, limit)
+        irrigationHistoryDao.deleteAll(deviceId) // Limpia primero
         irrigationHistoryDao.insertAll(list.map { it.toEntity() })
     }
+
 }
