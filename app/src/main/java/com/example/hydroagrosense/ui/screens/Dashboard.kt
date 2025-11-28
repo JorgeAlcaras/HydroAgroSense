@@ -7,7 +7,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,10 +17,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.hydroagrosense.data.Measure
@@ -68,13 +69,14 @@ fun Dashboard(
                     navigationIconContentColor = Color.Black
                 ),
                 actions = {
-                    *
+                    /*
                     IconButton(onClick = { navController.navigate("notifications") }) {
                         Icon(
                             imageVector = Icons.Outlined.Notifications,
                             contentDescription = "Notifications"
                         )
                     }
+                     */
                     IconButton(onClick = { navController.navigate("history") }) {
                         Icon(
                             imageVector = Icons.Filled.History,
@@ -138,10 +140,21 @@ fun Dashboard(
             val lastTelemetry = telemetryList.firstOrNull()
 
             // Si no hay datos aún, puedes mostrar placeholders
+
+            Text(
+                text = "Last Measures - ${if (lastTelemetry != null) lastTelemetry.date else "No date"}",
+                fontSize = 18.sp,
+                color = Color.Gray,
+                fontWeight = FontWeight.Normal,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .align(alignment = Alignment.End)
+            )
+
             MeasureCard(
                 measure = Measure(
                     id = 1,
-                    type = "Air",
+                    type = "Air Humidity",
                     value = lastTelemetry?.Air ?: 0.0,
                     unit = "%",
                     timestamp = System.currentTimeMillis(),

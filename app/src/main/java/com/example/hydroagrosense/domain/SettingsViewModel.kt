@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+
 data class SettingsUiState(
     val soilMoistureMin: String = "40",
     val soilMoistureMax: String = "60",
