@@ -68,6 +68,7 @@ fun Dashboard(
                     navigationIconContentColor = Color.Black
                 ),
                 actions = {
+                    *
                     IconButton(onClick = { navController.navigate("notifications") }) {
                         Icon(
                             imageVector = Icons.Outlined.Notifications,
@@ -131,7 +132,7 @@ fun Dashboard(
                 )
             }
 
-            OptimalRangesCard(optimalMeasures = optimalMeasures)
+            OptimalRangesCard(optimalMeasures = optimalMeasures, navController = navController)
 
             // Tomar la última telemetría guardada
             val lastTelemetry = telemetryList.firstOrNull()

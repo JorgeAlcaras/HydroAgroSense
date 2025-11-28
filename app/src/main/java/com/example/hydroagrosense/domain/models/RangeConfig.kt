@@ -1,6 +1,6 @@
 package com.example.hydroagrosense.domain.models
 
-class RangeConfig {
-    val min: Int = 0
-    val max: Int = 0
-}
+data class RangeConfig(
+    val min: Int,
+    val max: Int
+)
